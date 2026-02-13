@@ -72,12 +72,22 @@
         }
 
         .title { color: #ff4d6d; font-size: 3.5rem; font-weight: 600; margin: 0; z-index: 510; }
+        
+        /* แก้ไขส่วน container วิดีโอให้ใหญ่ขึ้นเป็น 350px */
         .image-container {
-            width: 250px; height: 250px; margin: 25px 0; border-radius: 50%;
-            border: 10px solid white; box-shadow: 0 15px 45px rgba(255, 77, 109, 0.3);
-            overflow: hidden; background: white; z-index: 510; position: relative;
+            width: 350px; 
+            height: 350px; 
+            margin: 25px 0; 
+            border-radius: 50%;
+            border: 10px solid white; 
+            box-shadow: 0 15px 45px rgba(255, 77, 109, 0.3);
+            overflow: hidden; 
+            background: white; 
+            z-index: 510; 
+            position: relative;
         }
-        .image-container img { width: 100%; height: 100%; object-fit: cover; }
+        .image-container video { width: 100%; height: 100%; object-fit: cover; }
+
         .message { color: #555; font-size: 1.2rem; line-height: 1.6; padding: 0 20px; z-index: 510; font-weight: 400; }
         .message b { color: #ff4d6d; }
         .btn-close { margin-top: 30px; padding: 12px 40px; background: #ff4d6d; color: white; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; z-index: 510; font-size: 1rem; }
@@ -99,7 +109,10 @@
     <div id="reveal">
         <h1 class="title">anniversary 2 Year ! 💖</h1>
         <div class="image-container">
-            <img src="image.jpg" alt="Couple Image">
+            <video autoplay loop muted playsinline>
+                <source src="video.mp4" type="video/mp4">
+                เบราว์เซอร์ของคุณไม่รองรับวิดีโอ
+            </video>
         </div>
         <div class="message">
             สุขสันต์วันครบรอบ 2 ปีน้าาาา<br>
@@ -148,7 +161,6 @@
             const monkey = document.getElementById('thief-monkey');
             monkey.style.display = 'block';
 
-            // ลิงวิ่งไปดึง Error ออกไปทีละอัน
             for (const err of errors) {
                 const rect = err.getBoundingClientRect();
                 monkey.style.left = rect.left + 'px';
@@ -160,7 +172,6 @@
                 setTimeout(() => err.remove(), 400);
             }
 
-            // จบขั้นตอนการพัง เข้าสู่หน้า Reveal
             setTimeout(() => {
                 monkey.style.display = 'none';
                 document.body.classList.remove('shake');
@@ -175,9 +186,8 @@
         }
 
         function initRevealElements() {
-            // เพิ่มตัววิ่งในพื้นหลัง (ลิง แฮมสเตอร์ หัวใจ)
             const symbols = ['❤️', '🐒', '🐹', '💗', '🐒', '🐹', '💖', '🐹'];
-            for (let i = 0; i < 25; i++) { // เพิ่มจำนวนเป็น 25 ตัว
+            for (let i = 0; i < 25; i++) {
                 const div = document.createElement('div');
                 div.className = 'bg-element';
                 div.innerText = symbols[i % symbols.length];
@@ -188,13 +198,11 @@
                 document.body.appendChild(div);
             }
 
-            // เพิ่มตัววิ่งตัดหน้าจอ (เยอะขึ้น)
             const runners = ['🐹', '🐒', '🐹', '🐒', '🐹', '🐒'];
             runners.forEach((emoji, i) => {
                 const run = document.createElement('div');
                 run.className = 'front-runner';
                 run.innerText = emoji;
-                // สุ่มตำแหน่งความสูง
                 const yPos = Math.random() * 80 + 10;
                 run.style.setProperty('--y-pos', yPos + '%');
                 run.style.setProperty('--y-next', (yPos + (Math.random() * 20 - 10)) + '%');
